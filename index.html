@@ -1473,11 +1473,11 @@
         }
 
         .repository-tree .tree-children[hidden] {
-            display: none;
+            display: none !important;
         }
 
-        .repository-tree .tree-children {
-            display: block;
+        .repository-tree .tree-children:not([hidden]) {
+            display: block !important;
         }
 
         .repository-tree .tree-status {
@@ -3147,7 +3147,10 @@
 
                     const children = document.createElement("div");
                     children.className = "tree-children tree-root-children";
+                    // All root folders start collapsed on every page load.
+                    const isDefaultOpen = false;
                     children.hidden = true;
+                    children.style.setProperty("display", "none", "important");
 
                     renderDirectoryContents(children, folderNode, 1);
 
@@ -3158,20 +3161,28 @@
                         children.appendChild(empty);
                     }
 
-                    folderButton.addEventListener("click", () => {
-                        const willOpen = children.hidden;
-                        children.hidden = !willOpen;
-                        folderButton.classList.toggle("open", willOpen);
+                    const setFolderOpen = (isOpen) => {
+                        children.hidden = !isOpen;
+                        children.style.setProperty("display", isOpen ? "block" : "none", "important");
+                        folderButton.classList.toggle("open", isOpen);
+                        folderButton.setAttribute("aria-expanded", String(isOpen));
                         folderButton.querySelector(".tree-folder-arrow").textContent =
-                            willOpen ? "▾" : "▸";
+                            isOpen ? "▾" : "▸";
+                    };
+
+                    folderButton.classList.toggle("open", isDefaultOpen);
+                    folderButton.setAttribute("aria-expanded", String(isDefaultOpen));
+                    folderButton.querySelector(".tree-folder-arrow").textContent =
+                        isDefaultOpen ? "▾" : "▸";
+                    folderButton.addEventListener("click", () => {
+                        setFolderOpen(children.hidden);
                     });
 
                     wrapper.appendChild(folderButton);
                     wrapper.appendChild(children);
                     repositoryTree.appendChild(wrapper);
 
-                    // Expand the first root folder on initial load.
-                    if (index === 0) folderButton.click();
+                    // No folder is expanded by default after a page reload.
                 });
             } catch (error) {
                 repositoryTree.innerHTML =
