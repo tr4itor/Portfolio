@@ -1405,6 +1405,190 @@
                 transition: none !important;
             }
         }
+
+        /* =========================================
+           PORTFOLIO REPOSITORY DOCUMENTATION
+           Added without changing the existing theme
+        ========================================= */
+
+        .repository-tree {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+            padding: 0 0 12px;
+        }
+
+        .repository-tree button {
+            display: block;
+            width: 100%;
+            padding: 7px 9px;
+            border: 1px solid transparent;
+            border-radius: 5px;
+            color: var(--text-secondary);
+            background: transparent;
+            text-align: left;
+            font-size: 12px;
+            overflow-wrap: anywhere;
+        }
+
+        .repository-tree button:hover,
+        .repository-tree button.active {
+            color: var(--green);
+            background: rgba(124, 255, 155, 0.055);
+            border-color: rgba(124, 255, 155, 0.12);
+        }
+
+        .repository-tree .tree-folder {
+            color: var(--text);
+            font-family: var(--font-mono);
+        }
+
+        .repository-tree .tree-file {
+            padding-left: 24px;
+            font-family: var(--font-mono);
+        }
+
+        .repository-tree .tree-root-folder,
+        .repository-tree .tree-node {
+            width: 100%;
+        }
+
+        .repository-tree .tree-folder {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            font-family: var(--font-mono);
+        }
+
+        .repository-tree .tree-folder-arrow {
+            width: 10px;
+            flex: 0 0 10px;
+            color: var(--green-dark);
+        }
+
+        .repository-tree .tree-folder-count {
+            margin-left: auto;
+            color: var(--text-muted);
+            font-size: 10px;
+        }
+
+        .repository-tree .tree-children[hidden] {
+            display: none;
+        }
+
+        .repository-tree .tree-children {
+            display: block;
+        }
+
+        .repository-tree .tree-status {
+            padding: 8px;
+            color: var(--text-muted);
+            font-size: 11px;
+            line-height: 1.6;
+        }
+
+        .repository-doc {
+            min-height: 180px;
+            padding: 24px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: var(--bg-secondary);
+            overflow-wrap: anywhere;
+        }
+
+        .repository-doc h1,
+        .repository-doc h2,
+        .repository-doc h3 {
+            color: var(--text);
+            line-height: 1.4;
+        }
+
+        .repository-doc h1 {
+            font-size: 30px;
+        }
+
+        .repository-doc h2 {
+            margin-top: 30px;
+            padding-bottom: 9px;
+            border-bottom: 1px solid var(--border);
+            font-size: 23px;
+        }
+
+        .repository-doc h3 {
+            margin-top: 24px;
+            font-size: 18px;
+        }
+
+        .repository-doc p,
+        .repository-doc li {
+            color: var(--text-secondary);
+            line-height: 1.85;
+        }
+
+        .repository-doc a {
+            color: var(--green);
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        .repository-doc pre {
+            padding: 16px;
+            overflow-x: auto;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            background: var(--bg);
+            color: var(--green);
+            font-family: var(--font-mono);
+            font-size: 12px;
+            line-height: 1.7;
+        }
+
+        .repository-doc code {
+            font-family: var(--font-mono);
+            font-size: 0.92em;
+        }
+
+        .repository-doc :not(pre) > code {
+            padding: 2px 5px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            background: var(--bg);
+        }
+
+        .repository-doc blockquote {
+            margin-left: 0;
+            padding: 4px 16px;
+            border-left: 3px solid var(--green-dark);
+            color: var(--text-secondary);
+        }
+
+        .repository-doc img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .repository-toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .repository-toolbar a {
+            color: var(--green);
+            font-family: var(--font-mono);
+            font-size: 12px;
+        }
+
+        .repository-path {
+            color: var(--text-muted);
+            font-family: var(--font-mono);
+            font-size: 12px;
+            overflow-wrap: anywhere;
+        }
+
     </style>
 </head>
 
@@ -1460,6 +1644,13 @@
             </a>
 
         </nav>
+
+
+        <div class="nav-label">Portfolio Repository</div>
+
+        <div class="repository-tree" id="repositoryTree" aria-label="Portfolio repository files">
+            <div class="tree-status">Loading repository files…</div>
+        </div>
 
         <div class="nav-label">External Resources</div>
 
@@ -2258,6 +2449,54 @@
         </section>
 
 
+
+        <!-- =====================================
+             PORTFOLIO REPOSITORY DOCUMENTATION
+        ====================================== -->
+
+        <section class="section" id="repository-docs">
+
+            <div class="container">
+
+                <div class="section-heading">
+                    <div>
+                        <span class="section-index">06 / REPOSITORY</span>
+                        <h2>Portfolio Documentation</h2>
+                    </div>
+
+                    <p>
+                        Browse the files and Markdown documentation in the
+                        Portfolio repository without leaving this page.
+                    </p>
+                </div>
+
+                <div class="repository-toolbar">
+                    <div class="repository-path" id="repositoryPath">
+                        Select a file from the sidebar.
+                    </div>
+
+                    <a
+                        href="https://github.com/tr4itor/Portfolio"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Open repository on GitHub ↗
+                    </a>
+                </div>
+
+                <article class="repository-doc" id="repositoryDocument" aria-live="polite">
+                    <h3>Repository contents</h3>
+                    <p>
+                        Select a file in the Portfolio Repository section
+                        of the sidebar. Markdown files will be rendered here.
+                    </p>
+                </article>
+
+            </div>
+
+        </section>
+
+
         <!-- =====================================
              CONTACT
         ====================================== -->
@@ -2551,8 +2790,403 @@
         }
 
 
+
         // ========================================
-        // 5. INITIALIZE
+        // PORTFOLIO REPOSITORY BROWSER
+        // Loads the real public repository tree and
+        // displays Markdown files in the existing page.
+        // ========================================
+
+        const repositoryOwner = "tr4itor";
+        const repositoryName = "Portfolio";
+        const repositoryBranch = "main";
+        const repositoryTree = document.getElementById("repositoryTree");
+        const repositoryDocument = document.getElementById("repositoryDocument");
+        const repositoryPath = document.getElementById("repositoryPath");
+
+        function escapeHtml(value) {
+            return String(value).replace(/[&<>"']/g, (character) => ({
+                "&": "&amp;",
+                "<": "&lt;",
+                ">": "&gt;",
+                '"': "&quot;",
+                "'": "&#39;"
+            })[character]);
+        }
+
+        function renderMarkdown(markdown, filePath) {
+            const lines = markdown.replace(/\r\n/g, "\n").split("\n");
+            const output = [];
+            let inCode = false;
+            let codeLines = [];
+            let inList = false;
+            let listType = "";
+            let paragraph = [];
+
+            const flushParagraph = () => {
+                if (paragraph.length) {
+                    output.push("<p>" + inlineMarkdown(paragraph.join(" ")) + "</p>");
+                    paragraph = [];
+                }
+            };
+
+            const closeList = () => {
+                if (inList) {
+                    output.push("</" + listType + ">");
+                    inList = false;
+                    listType = "";
+                }
+            };
+
+            const inlineMarkdown = (text) => {
+                let safe = escapeHtml(text);
+
+                safe = safe.replace(/`([^`]+)`/g, "<code>$1</code>");
+                safe = safe.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+                safe = safe.replace(/\*(.+?)\*/g, "<em>$1</em>");
+                safe = safe.replace(
+                    /\[([^\]]+)\]\(([^)]+)\)/g,
+                    (match, label, target) => {
+                        let url = target;
+
+                        if (!/^(https?:|mailto:|#)/i.test(url)) {
+                            const directory = filePath.includes("/")
+                                ? filePath.slice(0, filePath.lastIndexOf("/") + 1)
+                                : "";
+                            const joined = directory + url;
+                            url = "https://github.com/" + repositoryOwner + "/" +
+                                repositoryName + "/blob/" + repositoryBranch + "/" +
+                                joined.split("/").map(encodeURIComponent).join("/");
+                        }
+
+                        return '<a href="' + escapeHtml(url) +
+                            '" target="_blank" rel="noopener noreferrer">' +
+                            label + "</a>";
+                    }
+                );
+
+                return safe;
+            };
+
+            for (const line of lines) {
+                if (line.trim().startsWith("```") || line.trim().startsWith("~~~")) {
+                    flushParagraph();
+                    closeList();
+
+                    if (inCode) {
+                        output.push("<pre><code>" + escapeHtml(codeLines.join("\n")) + "</code></pre>");
+                        codeLines = [];
+                        inCode = false;
+                    } else {
+                        inCode = true;
+                    }
+                    continue;
+                }
+
+                if (inCode) {
+                    codeLines.push(line);
+                    continue;
+                }
+
+                if (!line.trim()) {
+                    flushParagraph();
+                    closeList();
+                    continue;
+                }
+
+                const heading = line.match(/^(#{1,6})\s+(.+)$/);
+                if (heading) {
+                    flushParagraph();
+                    closeList();
+                    const level = heading[1].length;
+                    output.push("<h" + level + ">" +
+                        inlineMarkdown(heading[2].replace(/\s+#+\s*$/, "")) +
+                        "</h" + level + ">");
+                    continue;
+                }
+
+                if (/^\s*([-*_])\1\1+\s*$/.test(line)) {
+                    flushParagraph();
+                    closeList();
+                    output.push("<hr>");
+                    continue;
+                }
+
+                const unordered = line.match(/^\s*[-*+]\s+(.+)$/);
+                const ordered = line.match(/^\s*\d+\.\s+(.+)$/);
+                if (unordered || ordered) {
+                    flushParagraph();
+                    const desiredType = unordered ? "ul" : "ol";
+                    if (!inList || listType !== desiredType) {
+                        closeList();
+                        output.push("<" + desiredType + ">");
+                        inList = true;
+                        listType = desiredType;
+                    }
+                    output.push("<li>" + inlineMarkdown((unordered || ordered)[1]) + "</li>");
+                    continue;
+                }
+
+                const quote = line.match(/^\s*>\s?(.*)$/);
+                if (quote) {
+                    flushParagraph();
+                    closeList();
+                    output.push("<blockquote>" + inlineMarkdown(quote[1]) + "</blockquote>");
+                    continue;
+                }
+
+                paragraph.push(line.trim());
+            }
+
+            flushParagraph();
+            closeList();
+
+            if (inCode) {
+                output.push("<pre><code>" + escapeHtml(codeLines.join("\n")) + "</code></pre>");
+            }
+
+            return output.join("\n") || "<p>This file has no displayable text.</p>";
+        }
+
+        function pathToId(path) {
+            return "repo-file-" + path.replace(/[^a-zA-Z0-9_-]/g, "-");
+        }
+
+        async function openRepositoryFile(path, button) {
+            repositoryTree.querySelectorAll("button").forEach((item) => {
+                item.classList.toggle("active", item === button);
+            });
+
+            repositoryPath.textContent = path;
+            repositoryDocument.innerHTML = "<p>Loading <code>" +
+                escapeHtml(path) + "</code>…</p>";
+
+            const githubUrl = "https://github.com/" + repositoryOwner + "/" +
+                repositoryName + "/blob/" + repositoryBranch + "/" +
+                path.split("/").map(encodeURIComponent).join("/");
+            const rawUrl = "https://raw.githubusercontent.com/" + repositoryOwner +
+                "/" + repositoryName + "/" + repositoryBranch + "/" +
+                path.split("/").map(encodeURIComponent).join("/");
+
+            if (!/\.(md|markdown|txt|py|sh|json|ya?ml|toml|ini|html|css|js|xml|csv)$/i.test(path)) {
+                repositoryDocument.innerHTML =
+                    "<h3>" + escapeHtml(path.split("/").pop()) + "</h3>" +
+                    "<p>This file type is not rendered inline.</p>" +
+                    '<p><a href="' + githubUrl +
+                    '" target="_blank" rel="noopener noreferrer">View file on GitHub ↗</a></p>';
+                return;
+            }
+
+            try {
+                const response = await fetch(rawUrl);
+                if (!response.ok) {
+                    throw new Error("HTTP " + response.status);
+                }
+
+                const text = await response.text();
+                const extension = path.split(".").pop().toLowerCase();
+
+                if (["md", "markdown", "txt"].includes(extension)) {
+                    repositoryDocument.innerHTML = renderMarkdown(text, path);
+                } else {
+                    repositoryDocument.innerHTML =
+                        "<h3>" + escapeHtml(path.split("/").pop()) + "</h3>" +
+                        "<p>Source preview:</p><pre><code>" +
+                        escapeHtml(text) + "</code></pre>";
+                }
+
+                repositoryDocument.insertAdjacentHTML(
+                    "afterbegin",
+                    '<p><a href="' + githubUrl +
+                    '" target="_blank" rel="noopener noreferrer">Open original file on GitHub ↗</a></p>'
+                );
+            } catch (error) {
+                repositoryDocument.innerHTML =
+                    "<h3>Could not load this file</h3>" +
+                    "<p>The GitHub API or raw file request may be temporarily unavailable.</p>" +
+                    '<p><a href="' + githubUrl +
+                    '" target="_blank" rel="noopener noreferrer">Open file on GitHub ↗</a></p>';
+            }
+
+            document.getElementById("repository-docs").scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+        }
+
+        async function loadRepositoryTree() {
+            const apiUrl = "https://api.github.com/repos/" + repositoryOwner +
+                "/" + repositoryName + "/git/trees/" + repositoryBranch + "?recursive=1";
+
+            // Only these three top-level directories are shown in the sidebar.
+            const allowedFolders = ["Methodology", "Reports", "Writeups"];
+
+            const createDirectoryNode = () => ({
+                directories: new Map(),
+                files: []
+            });
+
+            function addFileToTree(root, path) {
+                const parts = path.split("/");
+                let current = root;
+
+                for (let index = 1; index < parts.length; index++) {
+                    const part = parts[index];
+                    if (index === parts.length - 1) {
+                        current.files.push({ name: part, path });
+                    } else {
+                        if (!current.directories.has(part)) {
+                            current.directories.set(part, createDirectoryNode());
+                        }
+                        current = current.directories.get(part);
+                    }
+                }
+            }
+
+            function renderDirectoryContents(container, node, depth) {
+                const directories = Array.from(node.directories.entries())
+                    .sort(([a], [b]) => a.localeCompare(b));
+                const files = node.files.sort((a, b) => a.name.localeCompare(b.name));
+
+                directories.forEach(([name, childNode]) => {
+                    const wrapper = document.createElement("div");
+                    wrapper.className = "tree-node";
+
+                    const folderButton = document.createElement("button");
+                    folderButton.type = "button";
+                    folderButton.className = "tree-folder";
+                    folderButton.style.paddingLeft = (9 + depth * 13) + "px";
+                    folderButton.innerHTML =
+                        '<span class="tree-folder-arrow">▸</span>' +
+                        '<span>' + escapeHtml(name) + '/</span>';
+
+                    const children = document.createElement("div");
+                    children.className = "tree-children";
+                    children.hidden = true;
+
+                    renderDirectoryContents(children, childNode, depth + 1);
+
+                    folderButton.addEventListener("click", () => {
+                        const willOpen = children.hidden;
+                        children.hidden = !willOpen;
+                        folderButton.classList.toggle("open", willOpen);
+                        folderButton.querySelector(".tree-folder-arrow").textContent =
+                            willOpen ? "▾" : "▸";
+                    });
+
+                    wrapper.appendChild(folderButton);
+                    wrapper.appendChild(children);
+                    container.appendChild(wrapper);
+                });
+
+                files.forEach((file) => {
+                    const fileButton = document.createElement("button");
+                    fileButton.type = "button";
+                    fileButton.className = "tree-file";
+                    fileButton.style.paddingLeft = (22 + depth * 13) + "px";
+                    fileButton.textContent = "· " + file.name;
+                    fileButton.title = file.path;
+                    fileButton.addEventListener("click", () =>
+                        openRepositoryFile(file.path, fileButton)
+                    );
+                    container.appendChild(fileButton);
+                });
+            }
+
+            repositoryTree.innerHTML =
+                '<div class="tree-status">Loading selected folders…</div>';
+
+            try {
+                const response = await fetch(apiUrl, {
+                    headers: { "Accept": "application/vnd.github+json" }
+                });
+
+                if (!response.ok) {
+                    throw new Error("GitHub API returned " + response.status);
+                }
+
+                const data = await response.json();
+                if (data.truncated) {
+                    throw new Error("GitHub returned an incomplete repository tree");
+                }
+
+                const rootItems = new Map();
+                allowedFolders.forEach((folder) => {
+                    rootItems.set(folder, createDirectoryNode());
+                });
+
+                (data.tree || []).forEach((item) => {
+                    if (item.type !== "blob") return;
+
+                    const rootFolder = allowedFolders.find((folder) =>
+                        item.path.startsWith(folder + "/")
+                    );
+                    if (!rootFolder) return;
+
+                    addFileToTree(rootItems.get(rootFolder), item.path);
+                });
+
+                repositoryTree.innerHTML = "";
+
+                allowedFolders.forEach((folderName, index) => {
+                    const folderNode = rootItems.get(folderName);
+                    const fileCount = (data.tree || []).filter((item) =>
+                        item.type === "blob" && item.path.startsWith(folderName + "/")
+                    ).length;
+
+                    const wrapper = document.createElement("div");
+                    wrapper.className = "tree-root-folder";
+
+                    const folderButton = document.createElement("button");
+                    folderButton.type = "button";
+                    folderButton.className = "tree-folder tree-root-button";
+                    folderButton.innerHTML =
+                        '<span class="tree-folder-arrow">▸</span>' +
+                        '<span>' + escapeHtml(folderName) + '/</span>' +
+                        '<span class="tree-folder-count">' + fileCount + '</span>';
+
+                    const children = document.createElement("div");
+                    children.className = "tree-children tree-root-children";
+                    children.hidden = true;
+
+                    renderDirectoryContents(children, folderNode, 1);
+
+                    if (fileCount === 0) {
+                        const empty = document.createElement("div");
+                        empty.className = "tree-status";
+                        empty.textContent = "No files in this folder";
+                        children.appendChild(empty);
+                    }
+
+                    folderButton.addEventListener("click", () => {
+                        const willOpen = children.hidden;
+                        children.hidden = !willOpen;
+                        folderButton.classList.toggle("open", willOpen);
+                        folderButton.querySelector(".tree-folder-arrow").textContent =
+                            willOpen ? "▾" : "▸";
+                    });
+
+                    wrapper.appendChild(folderButton);
+                    wrapper.appendChild(children);
+                    repositoryTree.appendChild(wrapper);
+
+                    // Expand the first root folder on initial load.
+                    if (index === 0) folderButton.click();
+                });
+            } catch (error) {
+                repositoryTree.innerHTML =
+                    '<div class="tree-status">Could not load the selected folders. ' +
+                    '<a href="https://github.com/tr4itor/Portfolio/tree/main" ' +
+                    'target="_blank" rel="noopener noreferrer">Browse on GitHub ↗</a>' +
+                    '<br><small>' + escapeHtml(error.message) + '</small></div>';
+            }
+        }
+
+        loadRepositoryTree();
+
+
+        // ========================================
+        // 6. INITIALIZE
         // ========================================
 
         filterProjects();
