@@ -1,3 +1,1 @@
-# portfolio
-
-Hello, see webpage this repo ;3
+# Hello, see webpage this repo ;3
